@@ -19,7 +19,7 @@ The app provides a choice of several language models, including `llama-3.3-70b-v
 
 ### Chatbot MultiPDF
 
-
+![Image Process of PDF Document](image/Image Process PDF.png)
 
 The application follows these steps to provide responses to your questions:
 
