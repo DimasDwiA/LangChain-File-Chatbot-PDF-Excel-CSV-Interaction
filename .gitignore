@@ -1,1 +1,5 @@
 .env 
+__pycache__/ 
+db/ 
+db_hkunlp_instructor-xl/ 
+app.log/ 
