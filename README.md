@@ -19,7 +19,7 @@ The app provides a choice of several language models, including `llama-3.3-70b-v
 
 ### Chatbot MultiPDF
 
-![Image Process of PDF Document](image/Image Process PDF.png)
+![Image Process of PDF Document](images/Image-Process-PDF.png)
 
 The application follows these steps to provide responses to your questions:
 
@@ -37,7 +37,7 @@ The application follows these steps to provide responses to your questions:
 
 ### Chatbot Data Interaction
 
-
+![Image Process of file Excel/CSV](images/Image-Process-Excel-CSV.png)
 
 The application follows these steps to provide responses to your questions:
 
