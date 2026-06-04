@@ -1,9 +1,10 @@
 import streamlit as st
-from langchain.schema import HumanMessage, AIMessage
+from langchain_core.messages import HumanMessage, AIMessage
 
 def handle_respons(user_questions):
     if st.session_state.conversation is None:
         st.error("Conversation tidak tersedia. Pastikan PDF sudah diproses terlebih dahulu")
+        return
 
     # Tampilkan semua riwayat chat sebelumnya
     for message in st.session_state.chat_history:
@@ -14,21 +15,22 @@ def handle_respons(user_questions):
     with st.chat_message("user"):
         st.write(user_questions)
 
-    # Simpan pertanyaan ke dalam riwayat chat
-    st.session_state.chat_history.append(HumanMessage(content=user_questions))
-
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
-            response = st.session_state.conversation({'question': user_questions})
+            # New format for calling version v0.3
+            response = st.session_state.conversation.invoke({
+                "input": user_questions,
+                "chat_history": st.session_state.chat_history
+            })
 
-        # Simpan hasil percakapan
-        assistant_reply = response['chat_history'][-1].content  # Jawaban terakhir dari AI
+        # Get the answer and save to history (only once)
+        assistant_reply = response['answer']
+
+        st.session_state.chat_history.append(HumanMessage(content=user_questions))
         st.session_state.chat_history.append(AIMessage(content=assistant_reply))
 
         st.write(assistant_reply)
-
-    #st.chat_message("user").write(user_questions)
-    #st.session_state.chat_history.append({'role': 'user', 'content': user_questions})
+        
 """
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
