@@ -20,9 +20,13 @@ def main():
 
     load_dotenv()
 
+    # Push cache Hugging Face ke Drive D:
+    os.environ['HF_HOME'] = r'D:\AI_cache\huggingface'
+
+    groq_api_key = os.getenv("GROQ_API_KEY", "")
+
     api_key = os.getenv("LANGCHAIN_API_KEY") 
     if api_key:
-        groq_api_key = os.getenv("GROQ_API_KEY")
         os.environ['LANGCHAIN_API_KEY'] = api_key
         os.environ['LANGCHAIN_PROJECT'] = os.getenv("LANGCHAIN_PROJECT")
         os.environ['LANGCHAIN_TRACING'] = "true"
@@ -159,7 +163,7 @@ def main():
                         st.error(f"An error occured: {e}")
                         assistant_response = "I'm sorry, I couldn't process your request. Please try rephrasing or check your data."
 
-            st.session_state.chat_history_excel_csv.append({'role':'assistent', 'content': assistant_response})
+            st.session_state.chat_history_excel_csv.append({'role':'assistant', 'content': assistant_response})
 
 if __name__=="__main__":
     main()
